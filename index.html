@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Job Opportunity Explorer</title>
+    <title>Interactive Job Finder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -28,27 +28,19 @@
             transition: width 0.5s ease-in-out;
         }
     </style>
-    <!-- Chosen Palette: Slate Gray & Indigo -->
-    <!-- Application Structure Plan: The application is a unified single-page dashboard with comprehensive tab-based navigation. This structure amalgamates multiple job market datasets into one view, allowing users to efficiently switch between Texas-specific, national, and remote job categories without page reloads. The main user flow is to select a category, which dynamically renders a grid of company cards. This approach provides a powerful, centralized tool for job exploration. -->
-    <!-- Visualization & Content Choices: The application uses interactive cards with text and horizontal bar charts (styled divs) to represent job data and ratings. The primary interaction is clicking category buttons to filter the list. This is a highly effective and intuitive UI pattern for comparing a large volume of categorized data from multiple sources. The implementation uses Vanilla JavaScript for its lightweight and efficient DOM manipulation capabilities. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-slate-50 text-slate-800">
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-slate-900">Comprehensive Job Opportunity Explorer</h1>
+            <h1 class="text-4xl font-bold text-slate-900">Curated Job Opportunity Explorer</h1>
             <p class="mt-2 text-lg text-slate-600">An interactive guide for Software Development People Managers.</p>
         </header>
 
         <nav class="mb-8 p-2 bg-slate-200 rounded-lg shadow-inner">
             <div id="nav-container" class="flex flex-wrap justify-center gap-2">
-                <button data-category="texas-general" class="nav-button active px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Texas IT (100)</button>
-                <button data-category="texas-gov" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Texas Gov Contracts (100)</button>
-                <button data-category="austin" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Austin, TX (50)</button>
+                <button data-category="remote" class="nav-button active px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Remote (100)</button>
                 <button data-category="san-antonio" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">San Antonio, TX (50)</button>
-                <button data-category="texas-remote" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Texas Remote (50)</button>
-                <button data-category="remote" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Global Remote (100)</button>
                 <button data-category="california" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Santee, CA Area (50)</button>
                 <button data-category="utah" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">Utah (50)</button>
                 <button data-category="fintech-remote" class="nav-button px-4 py-2 text-sm sm:text-base font-medium text-slate-700 bg-white rounded-md shadow-sm hover:bg-slate-100 transition-colors">FinTech - Remote (50)</button>
@@ -63,147 +55,379 @@
 
     <script>
         const jobData = {
-            "texas-general": [
-                { "company": "Texas Instruments", "url": "https://careers.ti.com/", "title": "IT Development Manager", "pay": "$140k - $200k", "security": 4.4, "growth": 4.2, "satisfaction": 4.3 },
-                { "company": "AT&T (Dallas)", "url": "https://www.att.jobs/", "title": "Principal Architect, Technology", "pay": "$150k - $210k", "security": 3.8, "growth": 3.9, "satisfaction": 3.9 },
-                { "company": "Charles Schwab (Westlake)", "url": "https://jobs.schwab.com/", "title": "Sr. Manager, Software Engineering", "pay": "$145k - $205k", "security": 4.2, "growth": 4.1, "satisfaction": 4.2 },
-                { "company": "ExxonMobil (Houston)", "url": "https://jobs.exxonmobil.com/", "title": "IT Supervisor", "pay": "$160k - $230k", "security": 4.1, "growth": 4.0, "satisfaction": 4.0 },
-                { "company": "Toyota (Plano)", "url": "https://www.toyota.com/careers/", "title": "Manager, Information Systems", "pay": "$135k - $190k", "security": 4.5, "growth": 4.1, "satisfaction": 4.3 },
-                { "company": "American Airlines (Fort Worth)", "url": "https://jobs.aa.com/", "title": "Sr. Manager, IT Application Development", "pay": "$140k - $195k", "security": 3.9, "growth": 3.8, "satisfaction": 4.0 },
-                { "company": "MD Anderson Cancer Center (Houston)", "url": "https://www.mdanderson.org/careers", "title": "Manager, Research Information Systems", "pay": "$130k - $180k", "security": 4.6, "growth": 4.3, "satisfaction": 4.5 },
-                { "company": "Southwest Airlines (Dallas)", "url": "https://careers.southwestair.com/", "title": "Technology Manager", "pay": "$140k - $185k", "security": 4.5, "growth": 4.2, "satisfaction": 4.6 },
-                { "company": "Shell (Houston)", "url": "https://www.shell.us/careers.html", "title": "IT Engineering Manager", "pay": "$155k - $225k", "security": 4.0, "growth": 4.0, "satisfaction": 4.1 },
-                { "company": "Fidelity Investments (Westlake)", "url": "https://jobs.fidelity.com/", "title": "Director, Software Engineering", "pay": "$150k - $215k", "security": 4.3, "growth": 4.2, "satisfaction": 4.4 },
-                ...Array.from({length: 90}, (_, i) => ({ "company": `Texas Enterprise Solutions ${i+1}`, "url": "#", "title": "Senior IT Manager", "pay": "$140k - $200k", "security": 4.1, "growth": 4.0, "satisfaction": 4.2 }))
-            ],
-            "texas-gov": [
-                { "company": "Lockheed Martin (Fort Worth)", "url": "https://www.lockheedmartinjobs.com/", "title": "Software Engineering Manager", "pay": "$150k - $220k", "security": 4.5, "growth": 4.2, "satisfaction": 4.1 },
-                { "company": "Raytheon (RTX)", "url": "https://careers.rtx.com/", "title": "Senior Manager, Digital Technology", "pay": "$145k - $210k", "security": 4.3, "growth": 4.1, "satisfaction": 4.0 },
-                { "company": "Booz Allen Hamilton (San Antonio)", "url": "https://careers.boozallen.com/", "title": "Lead Technologist", "pay": "$130k - $190k", "security": 4.4, "growth": 4.3, "satisfaction": 4.3 },
-                { "company": "L3Harris (Greenville)", "url": "https://www.l3harris.com/careers", "title": "Manager, Software Engineering", "pay": "$140k - $200k", "security": 4.1, "growth": 4.0, "satisfaction": 3.9 },
-                { "company": "General Dynamics IT (San Antonio)", "url": "https://www.gdit.com/careers/", "title": "IT Project Manager, Senior", "pay": "$125k - $180k", "security": 4.2, "growth": 4.1, "satisfaction": 4.0 },
-                { "company": "Northrop Grumman", "url": "https://www.northropgrumman.com/careers/", "title": "Cyber Systems Engineering Manager", "pay": "$155k - $225k", "security": 4.4, "growth": 4.2, "satisfaction": 4.1 },
-                { "company": "BAE Systems", "url": "https://jobs.baesystems.com/", "title": "Engineering Manager", "pay": "$140k - $205k", "security": 4.2, "growth": 4.0, "satisfaction": 4.0 },
-                { "company": "Leidos", "url": "https://careers.leidos.com/", "title": "IT Manager", "pay": "$130k - $195k", "security": 4.1, "growth": 4.1, "satisfaction": 4.1 },
-                { "company": "SAIC", "url": "https://www.saic.com/careers", "title": "Senior Manager, Systems Engineering", "pay": "$140k - $200k", "security": 4.0, "growth": 4.0, "satisfaction": 3.9 },
-                { "company": "CACI", "url": "https://careers.caci.com/", "title": "Project Manager, Technology", "pay": "$120k - $175k", "security": 4.1, "growth": 4.2, "satisfaction": 4.1 },
-                ...Array.from({length: 90}, (_, i) => ({ "company": `Defense Contractor ${i+1}`, "url": "#", "title": "Cleared Software Manager", "pay": "$135k - $190k", "security": 4.3, "growth": 4.1, "satisfaction": 4.0 }))
-            ],
-            "austin": [
-                { "company": "Apple", "url": "https://www.apple.com/careers/us/", "title": "Engineering Manager, Software", "pay": "$200k - $300k", "security": 4.6, "growth": 4.5, "satisfaction": 4.5 },
-                { "company": "Google", "url": "https://careers.google.com/", "title": "Manager, Software Engineering", "pay": "$190k - $280k", "security": 4.5, "growth": 4.6, "satisfaction": 4.4 },
-                { "company": "Tesla", "url": "https://www.tesla.com/careers", "title": "Software Engineering Manager, Autopilot", "pay": "$180k - $270k", "security": 3.9, "growth": 4.8, "satisfaction": 3.9 },
-                { "company": "Oracle", "url": "https://www.oracle.com/careers/", "title": "Senior Manager, Software Development", "pay": "$150k - $220k", "security": 4.1, "growth": 4.2, "satisfaction": 4.0 },
-                { "company": "Dell Technologies", "url": "https://jobs.dell.com/", "title": "Senior Manager, Engineering", "pay": "$145k - $210k", "security": 4.2, "growth": 4.0, "satisfaction": 4.1 },
-                { "company": "Indeed", "url": "https://www.indeed.jobs/", "title": "Manager, Software Development", "pay": "$170k - $240k", "security": 4.3, "growth": 4.4, "satisfaction": 4.3 },
-                { "company": "Meta", "url": "https://www.metacareers.com/", "title": "Engineering Manager", "pay": "$210k - $320k", "security": 4.1, "growth": 4.5, "satisfaction": 4.3 },
-                { "company": "Amazon (AWS)", "url": "https://www.amazon.jobs/", "title": "Software Development Manager", "pay": "$160k - $250k", "security": 4.0, "growth": 4.3, "satisfaction": 3.8 },
-                { "company": "AMD", "url": "https://careers.amd.com/", "title": "Sr Manager, Software Engineering", "pay": "$165k - $235k", "security": 4.4, "growth": 4.5, "satisfaction": 4.2 },
-                { "company": "Visa", "url": "https://usa.visa.com/careers.html", "title": "Director, Software Engineering", "pay": "$155k - $225k", "security": 4.3, "growth": 4.1, "satisfaction": 4.2 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `Austin Tech Innovator ${i+1}`, "url": "#", "title": "Engineering Lead", "pay": "$150k - $210k", "security": 4.2, "growth": 4.4, "satisfaction": 4.3 }))
+            "remote": [
+                { "company": "The Browser Company of New York", "url": "https://www.thebrowser.company/careers", "title": "Staff Software Engineer, Security", "pay": "$225,000 - $300,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "GitLab", "url": "https://about.gitlab.com/jobs/", "title": "Senior Backend Engineer", "pay": "$125,000 - $220,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Automattic", "url": "https://automattic.com/work-with-us/", "title": "Principal Engineer", "pay": "$180,000 - $250,000", "security": 4, "growth": 4, "satisfaction": 5 },
+                { "company": "Atlassian", "url": "https://www.atlassian.com/company/careers", "title": "Senior Software Engineer", "pay": "$150,000 - $245,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "Stripe", "url": "https://stripe.com/jobs", "title": "Engineering Manager, Product", "pay": "$214,500 - $321,800", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Shopify", "url": "https://www.shopify.com/careers", "title": "Senior Staff Developer", "pay": "$190,000 - $280,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Coinbase", "url": "https://www.coinbase.com/careers", "title": "Senior Software Engineer, Backend", "pay": "$175,000 - $240,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Dropbox", "url": "https://www.dropbox.com/jobs", "title": "Senior Machine Learning Engineer", "pay": "$160,000 - $235,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Reddit", "url": "https://www.redditinc.com/careers", "title": "Staff Backend Engineer", "pay": "$182,000 - $273,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "HubSpot", "url": "https://www.hubspot.com/careers", "title": "Technical Lead, FinTech", "pay": "$166,000 - $248,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "CrowdStrike", "url": "https://www.crowdstrike.com/careers/", "title": "Senior Software Engineer, Cloud", "pay": "$140,000 - $225,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "DataDog", "url": "https://www.datadoghq.com/careers/", "title": "Senior Software Engineer", "pay": "$155,000 - $230,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Twilio", "url": "https://www.twilio.com/company/jobs", "title": "Principal Software Engineer", "pay": "$180,000 - $260,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Zapier", "url": "https://zapier.com/jobs", "title": "Senior Backend Engineer", "pay": "$150,000 - $190,000", "security": 4, "growth": 4, "satisfaction": 5 },
+                { "company": "Buffer", "url": "https://buffer.com/journey", "title": "Senior Product Engineer", "pay": "$135,000 - $170,000", "security": 4, "growth": 3, "satisfaction": 5 },
+                { "company": "Doist", "url": "https://doist.com/careers", "title": "Senior Backend Engineer", "pay": "$130,000 - $165,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Mozilla", "url": "https://careers.mozilla.org/", "title": "Staff Software Engineer", "pay": "$160,000 - $215,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Elastic", "url": "https://www.elastic.co/about/careers", "title": "Senior Software Engineer, Cloud", "pay": "$145,000 - $210,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "GitHub", "url": "https://github.com/about/careers", "title": "Staff Product Manager", "pay": "$170,000 - $240,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "HashiCorp", "url": "https://www.hashicorp.com/careers", "title": "Senior Software Engineer", "pay": "$160,000 - $225,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Okta", "url": "https://www.okta.com/company/careers/", "title": "Principal Software Engineer", "pay": "$190,000 - $275,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "PagerDuty", "url": "https://www.pagerduty.com/careers/", "title": "Senior Software Engineer", "pay": "$150,000 - $220,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Palantir Technologies", "url": "https://www.palantir.com/careers/", "title": "Software Engineer", "pay": "$140,000 - $200,000", "security": 4, "growth": 4, "satisfaction": 3 },
+                { "company": "Snowflake", "url": "https://careers.snowflake.com/", "title": "Principal Software Engineer", "pay": "$215,000 - $320,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Square (Block)", "url": "https://careers.squareup.com/", "title": "Senior Software Engineer", "pay": "$165,000 - $260,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Veeva Systems", "url": "https://careers.veeva.com/", "title": "Senior Software Engineer", "pay": "$140,000 - $200,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Affirm", "url": "https://www.affirm.com/careers", "title": "Staff Software Engineer", "pay": "$180,000 - $260,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Working Solutions", "url": "https://workingsolutions.com/careers/", "title": "Project Manager", "pay": "$85,000 - $120,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "UnitedHealth Group", "url": "https://careers.unitedhealthgroup.com/", "title": "Principal Data Engineer", "pay": "$125,000 - $210,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "CVS Health", "url": "https://jobs.cvshealth.com/", "title": "Lead Director, Digital Engineering", "pay": "$150,000 - $230,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Amplify Education", "url": "https://amplify.com/careers/", "title": "Senior Software Engineer", "pay": "$130,000 - $180,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Zscaler", "url": "https://www.zscaler.com/careers", "title": "Principal Software Engineer", "pay": "$190,000 - $280,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Lumen Technologies", "url": "https://jobs.lumen.com/", "title": "Lead Software Developer", "pay": "$120,000 - $175,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Pinterest", "url": "https://www.pinterestcareers.com/", "title": "Senior Machine Learning Engineer", "pay": "$170,000 - $255,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "SAP", "url": "https://www.sap.com/about/careers.html", "title": "Expert Software Engineer", "pay": "$160,000 - $240,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Cloudflare", "url": "https://www.cloudflare.com/careers/", "title": "Staff Systems Engineer", "pay": "$185,000 - $270,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "DoorDash", "url": "https://careers.doordash.com/", "title": "Staff Software Engineer, Android", "pay": "$200,000 - $290,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "Grafana Labs", "url": "https://grafana.com/about/careers/", "title": "Senior Software Engineer, Backend", "pay": "$150,000 - $210,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Canonical", "url": "https://canonical.com/careers", "title": "Principal Engineer, Kubernetes", "pay": "$160,000 - $230,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Circle Internet Financial", "url": "https://www.circle.com/en/careers", "title": "Data Engineering Manager", "pay": "$182,500 - $240,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Udemy", "url": "https://about.udemy.com/careers/", "title": "Senior Engineering Manager", "pay": "$190,000 - $260,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Contentful", "url": "https://www.contentful.com/careers/", "title": "Senior Backend Engineer", "pay": "$145,000 - $200,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Yelp", "url": "https://www.yelp.com/careers", "title": "Engineering Manager, Search", "pay": "$180,000 - $250,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Zoom", "url": "https://careers.zoom.us/", "title": "Staff Software Engineer", "pay": "$175,000 - $245,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "ServiceNow", "url": "https://www.servicenow.com/careers.html", "title": "Principal Software Engineer", "pay": "$190,000 - $280,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Zillow", "url": "https://www.zillowgroup.com/careers/", "title": "Senior Software Development Engineer", "pay": "$160,000 - $230,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Adobe", "url": "https://www.adobe.com/careers.html", "title": "Senior Computer Scientist", "pay": "$155,000 - $225,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "Amazon", "url": "https://www.amazon.jobs/", "title": "Senior Software Development Engineer", "pay": "$170,000 - $270,000", "security": 5, "growth": 4, "satisfaction": 3 },
+                { "company": "Toptal", "url": "https://www.toptal.com/careers", "title": "Engineering Manager", "pay": "$142,000 - $225,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Wikimedia Foundation", "url": "https://wikimediafoundation.org/jobs/", "title": "Engineering Manager", "pay": "$132,439 - $208,378", "security": 5, "growth": 3, "satisfaction": 5 },
+                { "company": "Fastly", "url": "https://www.fastly.com/about/careers", "title": "Senior Software Engineer", "pay": "$187,000 - $233,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Red Hat", "url": "https://www.redhat.com/en/jobs", "title": "Software Engineering Manager", "pay": "$174,000 - $255,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Allstate", "url": "https://www.allstate.jobs/", "title": "Lead Software Engineer", "pay": "$120,000 - $170,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Spotify", "url": "https://www.lifeatspotify.com/jobs", "title": "Senior Backend Engineer", "pay": "$170,000 - $240,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Appcues", "url": "https://www.appcues.com/careers", "title": "Senior Software Engineer", "pay": "$140,000 - $185,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Awesome Motive", "url": "https://awesomemotive.com/careers/", "title": "Senior WordPress Developer", "pay": "$100,000 - $150,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "1Password", "url": "https://1password.com/jobs/", "title": "Senior Backend Developer", "pay": "$140,000 - $190,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "Thumbtack", "url": "https://www.thumbtack.com/careers/", "title": "Staff Software Engineer", "pay": "$190,000 - $270,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Coursera", "url": "https://about.coursera.org/careers/", "title": "Senior Software Engineer, ML", "pay": "$165,000 - $235,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Webflow", "url": "https://webflow.com/jobs", "title": "Senior Software Engineer", "pay": "$170,000 - $240,000", "security": 4, "growth": 5, "satisfaction": 5 },
+                { "company": "SeatGeek", "url": "https://seatgeek.com/jobs", "title": "Senior Software Engineer", "pay": "$160,000 - $220,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Stack Overflow", "url": "https://stackoverflow.co/company/work-here/", "title": "Staff Engineer", "pay": "$180,000 - $250,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Workiva", "url": "https://www.workiva.com/careers", "title": "Principal Software Engineer", "pay": "$175,000 - $245,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Zendesk", "url": "https://www.zendesk.com/company/careers/", "title": "Principal Software Engineer", "pay": "$190,000 - $270,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Huntress", "url": "https://www.huntress.com/careers", "title": "Senior Security Researcher", "pay": "$150,000 - $210,000", "security": 4, "growth": 5, "satisfaction": 5 },
+                { "company": "Vista", "url": "https://careers.vista.com/", "title": "Lead Software Engineer", "pay": "$140,000 - $195,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Superhuman", "url": "https://superhuman.com/careers", "title": "Senior Full-Stack Engineer", "pay": "$180,000 - $250,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Plaid", "url": "https://plaid.com/careers/", "title": "Engineering Manager", "pay": "$214,800 - $366,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Brex", "url": "https://www.brex.com/careers", "title": "Engineering Manager", "pay": "$240,000 - $375,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Ramp", "url": "https://ramp.com/careers", "title": "Software Engineering Manager", "pay": "$227,000 - $311,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Chime", "url": "https://www.chime.com/careers/", "title": "Engineering Manager, Lending", "pay": "$176,490 - $245,100", "security": 4, "growth": 4, "satisfaction": 3 },
+                { "company": "ClickUp", "url": "https://clickup.com/careers", "title": "Principal Frontend Architect", "pay": "$250,000 - $290,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Upstart", "url": "https://www.upstart.com/careers", "title": "Senior Software Engineer", "pay": "$160,000 - $230,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Tackle.io", "url": "https://tackle.io/careers", "title": "Senior Software Engineer", "pay": "$150,000 - $200,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Recharge Payments", "url": "https://rechargepayments.com/careers/", "title": "Staff Engineer", "pay": "$170,000 - $240,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Articulate", "url": "https://articulate.com/company/careers", "title": "Senior Software Engineer", "pay": "$140,000 - $190,000", "security": 5, "growth": 3, "satisfaction": 5 },
+                { "company": "Modern Tribe", "url": "https://tri.be/careers", "title": "Senior WordPress Engineer", "pay": "$110,000 - $150,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "X-Team", "url": "https://x-team.com/join/", "title": "Senior Full-Stack Developer", "pay": "$120,000 - $180,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Turing", "url": "https://www.turing.com/jobs", "title": "Senior AI/ML Engineer", "pay": "$150,000 - $220,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "Andela", "url": "https://andela.com/careers/", "title": "Senior Python Engineer", "pay": "$110,000 - $160,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "TestGorilla", "url": "https://www.testgorilla.com/careers/", "title": "Senior Full-Stack Developer", "pay": "$130,000 - $170,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Deel", "url": "https://www.deel.com/careers", "title": "Senior Backend Engineer", "pay": "$150,000 - $210,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Remote", "url": "https://remote.com/careers", "title": "Staff Engineer", "pay": "$170,000 - $230,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Gusto", "url": "https://gusto.com/careers", "title": "Staff Software Engineer", "pay": "$180,000 - $250,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Kraken", "url": "https://www.kraken.com/careers", "title": "Senior Backend Engineer (Rust)", "pay": "$160,000 - $220,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Skillsoft", "url": "https://www.skillsoft.com/careers", "title": "Principal Software Engineer", "pay": "$145,000 - $200,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Pearson", "url": "https://www.pearson.com/careers.html", "title": "Lead Software Engineer", "pay": "$130,000 - $180,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Oracle", "url": "https://www.oracle.com/careers/", "title": "Principal Member of Technical Staff", "pay": "$150,000 - $220,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "monday.com", "url": "https://monday.com/careers", "title": "Senior Fullstack Engineer", "pay": "$160,000 - $230,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "FloQast", "url": "https://floqast.com/careers/", "title": "Senior Software Engineer", "pay": "$150,000 - $210,000", "security": 4, "growth": 4, "satisfaction": 5 },
+                { "company": "Human Interest", "url": "https://humaninterest.com/careers", "title": "Staff Software Engineer", "pay": "$180,000 - $250,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Doximity", "url": "https://work.doximity.com/", "title": "Senior Backend Engineer", "pay": "$170,000 - $240,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Motive", "url": "https://gomotive.com/careers", "title": "Staff Software Engineer", "pay": "$185,000 - $265,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "JumpCloud", "url": "https://jumpcloud.com/careers", "title": "Senior Software Engineer", "pay": "$145,000 - $205,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Valimail", "url": "https://www.valimail.com/about/careers/", "title": "Staff Engineer, Backend", "pay": "$170,000 - $230,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Terakeet", "url": "https://terakeet.com/careers/", "title": "Sr. Software Engineer", "pay": "$130,000 - $175,000", "security": 4, "growth": 3, "satisfaction": 5 },
+                { "company": "DNSFilter", "url": "https://www.dnsfilter.com/about/careers", "title": "Senior Software Engineer (Go)", "pay": "$150,000 - $200,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Openly", "url": "https://openly.com/careers", "title": "Lead Software Engineer", "pay": "$160,000 - $220,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "ActBlue", "url": "https://www.actblue.com/about/jobs", "title": "Senior Staff Engineer", "pay": "$180,000 - $240,000", "security": 5, "growth": 3, "satisfaction": 5 },
+                { "company": "Welocalize", "url": "https://careers.welocalize.com/", "title": "Program Manager, Localization", "pay": "$90,000 - $125,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Trello (Atlassian)", "url": "https://www.atlassian.com/company/careers", "title": "Senior Full-Stack Engineer", "pay": "$150,000 - $245,000", "security": 5, "growth": 4, "satisfaction": 5 }
             ],
             "san-antonio": [
-                { "company": "USAA", "url": "https://www.usaajobs.com/", "title": "IT Manager - Engineering", "pay": "$130k - $180k", "security": 4.5, "growth": 4.0, "satisfaction": 4.2 },
-                { "company": "H-E-B Digital", "url": "https://digital.heb.com/careers", "title": "Engineering Manager", "pay": "$140k - $195k", "security": 4.8, "growth": 4.6, "satisfaction": 4.7 },
-                { "company": "JPMorgan Chase", "url": "https://careers.jpmorgan.com/", "title": "VP, Software Engineering Manager", "pay": "$145k - $200k", "security": 4.3, "growth": 4.1, "satisfaction": 4.1 },
-                { "company": "Microsoft", "url": "https://careers.microsoft.com/", "title": "Principal Software Engineering Manager", "pay": "$170k - $250k", "security": 4.6, "growth": 4.4, "satisfaction": 4.5 },
-                { "company": "Whataburger", "url": "https://whataburger.com/careers", "title": "Manager, IT Solutions", "pay": "$110k - $150k", "security": 4.4, "growth": 4.2, "satisfaction": 4.3 },
-                { "company": "SWBC", "url": "https://www.swbc.com/careers", "title": "IT Development Manager", "pay": "$120k - $160k", "security": 4.0, "growth": 3.8, "satisfaction": 3.9 },
-                { "company": "Plus One Robotics", "url": "https://plusonerobotics.com/careers/", "title": "Systems Engineering Manager", "pay": "$130k - $175k", "security": 4.3, "growth": 4.8, "satisfaction": 4.5 },
-                { "company": "Sirius Computer Solutions (CDW)", "url": "https://www.cdwjobs.com/search/jobs", "title": "Manager, Software Engineering", "pay": "$130k - $180k", "security": 4.2, "growth": 4.1, "satisfaction": 4.0 },
-                { "company": "Valero Energy", "url": "https://www.valero.com/en-us/careers", "title": "IT Project Manager", "pay": "$125k - $170k", "security": 4.2, "growth": 3.9, "satisfaction": 4.1 },
-                { "company": "Frost Bank", "url": "https://www.frostbank.com/careers", "title": "Application Development Manager", "pay": "$130k - $185k", "security": 4.6, "growth": 4.0, "satisfaction": 4.4 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `San Antonio Tech Co ${i+1}`, "url": "#", "title": "IT Project Manager", "pay": "$125k - $170k", "security": 4.0, "growth": 4.1, "satisfaction": 4.2 }))
+                { "company": "USAA", "url": "https://www.usaajobs.com/", "title": "Senior Software Engineer", "pay": "$141,000 - $179,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "H-E-B", "url": "https://careers.heb.com/", "title": "Senior Data Engineer - Accounting", "pay": "$96,000 - $130,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Rackspace Technology", "url": "https://www.rackspace.com/careers", "title": "Senior Cloud Solutions Architect", "pay": "$120,000 - $160,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Frost Bank", "url": "https://careers.frostbank.com/", "title": "Senior Enterprise Security Engineer", "pay": "$120,000 - $160,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Valero Energy", "url": "https://www.valero.com/en-us/careers", "title": "Senior IT Systems Analyst", "pay": "$110,000 - $150,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Oracle", "url": "https://www.oracle.com/careers/", "title": "Sr. Principal Advanced Services Engineer", "pay": "$140,000 - $200,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "JPMorgan Chase & Co.", "url": "https://careers.jpmorgan.com/", "title": "Vice President, Senior Software Engineer", "pay": "$140,000 - $190,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Microsoft", "url": "https://careers.microsoft.com/", "title": "Senior Datacenter Technician", "pay": "$90,000 - $130,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Accenture", "url": "https://www.accenture.com/us-en/careers", "title": "Senior Technology Architect", "pay": "$146,000 - $205,000+", "security": 4, "growth": 4, "satisfaction": 3 },
+                { "company": "Booz Allen Hamilton", "url": "https://careers.boozallen.com/", "title": "Senior Data Scientist", "pay": "$100,000 - $149,500", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "CACI International", "url": "https://careers.caci.com/", "title": "Senior Systems Administrator", "pay": "$95,000 - $135,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "GDIT", "url": "https://www.gdit.com/careers/", "title": "Senior Cyber Security Analyst", "pay": "$100,000 - $140,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Dell Technologies", "url": "https://jobs.dell.com/", "title": "Senior Principal Software Engineer", "pay": "$140,000 - $210,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "SWBC", "url": "https://careers.swbc.com/", "title": "Senior Application Developer", "pay": "$105,000 - $145,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Whataburger", "url": "https://whataburger.com/careers", "title": "IT Manager, Enterprise Systems", "pay": "$110,000 - $150,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "PwC", "url": "https://www.pwc.com/us/en/careers.html", "title": "Oracle SCM Functional Consultant", "pay": "$119,000 - $150,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "KPMG", "url": "https://www.kpmg.us/careers.html", "title": "Manager, Tech Assurance", "pay": "$110,000 - $160,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "TaskUs", "url": "https://www.taskus.com/careers/", "title": "Director of IT", "pay": "$140,000 - $190,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "iHeartMedia", "url": "https://www.iheartmedia.com/careers", "title": "Senior DevOps Engineer", "pay": "$120,000 - $160,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Sirius Computer Solutions", "url": "https://www.cdw.com/en/company/careers.html", "title": "Senior Solutions Architect", "pay": "$130,000 - $185,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "X Technologies, Inc.", "url": "https://www.x-technologies.com/careers", "title": "Senior Audio-Visual Specialist", "pay": "Not Specified", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Plus One Robotics", "url": "https://plusonerobotics.com/careers/", "title": "Senior Robotics Software Engineer", "pay": "$120,000 - $170,000", "security": 2, "growth": 5, "satisfaction": 4 },
+                { "company": "Jungle Disk", "url": "https://www.jungledisk.com/careers/", "title": "Senior DevOps Engineer", "pay": "$110,000 - $150,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Geekdom", "url": "https://geekdom.com/", "title": "(Varies by member company)", "pay": "(Varies)", "security": 2, "growth": 4, "satisfaction": 4 },
+                { "company": "Dura Software", "url": "https://www.durasoftware.com/careers", "title": "Software Engineering Manager", "pay": "$140,000 - $225,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "CDW", "url": "https://www.cdw.com/en/company/careers.html", "title": "Senior Consulting Engineer", "pay": "$120,000 - $170,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Arrive Logistics", "url": "https://www.arrivelogistics.com/careers/", "title": "Software Engineer II", "pay": "$95,000 - $135,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "Thrive Internet Marketing", "url": "https://thriveagency.com/careers/", "title": "Senior Web Developer", "pay": "$90,000 - $125,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "AllianceBernstein", "url": "https://www.alliancebernstein.com/corporate/en/careers.html", "title": "Senior Quantitative Developer", "pay": "$140,000 - $200,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Welcome Tech", "url": "https://welcome.tech/careers", "title": "Senior Backend Engineer", "pay": "$130,000 - $180,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Webhead", "url": "https://www.webhead.com/careers", "title": "Senior Full Stack Developer", "pay": "$100,000 - $140,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Genesis Networks", "url": "https://www.genesisnet.com/careers/", "title": "Network Engineer", "pay": "$90,000 - $130,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Carnegie Technologies", "url": "https://www.carnegietechnologies.com/careers", "title": "Embedded Software Engineer", "pay": "$100,000 - $150,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "eMetric", "url": "https://www.emetric.net/careers", "title": "Senior Data Architect", "pay": "$120,000 - $165,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Raba Kistner", "url": "https://www.rkci.com/careers/", "title": "IT Manager", "pay": "$85,000 - $120,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Sendspark", "url": "https://www.sendspark.com/careers", "title": "Full Stack Developer", "pay": "$92,000 - $106,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "High Touch Technologies", "url": "https://hightouchtechnologies.com/who-we-are/careers/", "title": "Senior Systems Engineer", "pay": "$90,000 - $125,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Leadhub", "url": "https://leadhub.net/careers/", "title": "Senior Digital Marketing Strategist", "pay": "$80,000 - $110,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "FunnelAI (Fennel)", "url": "https://fennel.ai/careers", "title": "Engineering Manager", "pay": "$134,000 - $187,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "GoSmart", "url": "https://www.gosmartmanagers.com/careers/", "title": "IT Systems Manager", "pay": "$80,000 - $115,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "Clear Channel Outdoor", "url": "https://clearchanneloutdoor.com/careers/", "title": "Senior Manager, IT", "pay": "$110,000 - $150,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Deloitte", "url": "https://www2.deloitte.com/us/en/careers.html", "title": "Oracle HCM Consultant", "pay": "$100,000 - $160,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Boeing", "url": "https://jobs.boeing.com/", "title": "Experienced Software Engineer", "pay": "$120,000 - $180,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Toyota", "url": "https://www.toyota.com/careers/", "title": "Senior Engineer, IT Systems", "pay": "$110,000 - $160,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "BCFS", "url": "https://www.bcfs.net/careers/", "title": "IT Director", "pay": "$120,000 - $170,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Cloud Pencils", "url": "https://www.cloudpencils.com/", "title": "Senior ERP Developer", "pay": "$100,000 - $140,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Open Security", "url": "https://opensecurity.com/", "title": "Senior Cybersecurity Analyst", "pay": "$110,000 - $155,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Propel Financial Services", "url": "https://www.propelfinancialservices.com/careers/", "title": "Software Development Manager", "pay": "$125,000 - $175,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Beam Benefits", "url": "https://www.beambenefits.com/careers", "title": "Senior Software Engineer", "pay": "$130,000 - $180,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Ernest", "url": "https://www.joinernest.com/careers", "title": "Senior Backend Engineer", "pay": "$140,000 - $190,000", "security": 3, "growth": 4, "satisfaction": 4 }
             ],
-            "texas-remote": [
-                { "company": "Dell Technologies", "url": "https://jobs.dell.com/", "title": "Remote Software Engineering Manager", "pay": "$145k - $215k", "security": 4.2, "growth": 4.0, "satisfaction": 4.1 },
-                { "company": "Atlassian", "url": "https://www.atlassian.com/company/careers", "title": "Senior Engineering Manager (Remote, TX)", "pay": "$170k - $240k", "security": 4.7, "growth": 4.5, "satisfaction": 4.5 },
-                { "company": "CrowdStrike", "url": "https://www.crowdstrike.com/careers/", "title": "Manager, Engineering - Remote", "pay": "$160k - $230k", "security": 4.5, "growth": 4.8, "satisfaction": 4.6 },
-                { "company": "Oracle", "url": "https://www.oracle.com/careers/", "title": "Software Development Manager (Remote)", "pay": "$140k - $200k", "security": 4.1, "growth": 4.2, "satisfaction": 4.0 },
-                { "company": "Cisco", "url": "https://www.cisco.com/c/en/us/about/careers.html", "title": "Engineering Manager, Security (Remote)", "pay": "$150k - $215k", "security": 4.3, "growth": 4.2, "satisfaction": 4.3 },
-                { "company": "VMware", "url": "https://careers.vmware.com/", "title": "Manager, Engineering (Texas Remote)", "pay": "$155k - $225k", "security": 4.2, "growth": 4.1, "satisfaction": 4.2 },
-                { "company": "Salesforce", "url": "https://www.salesforce.com/company/careers/", "title": "Sr. Engineering Manager (Remote)", "pay": "$180k - $260k", "security": 4.6, "growth": 4.4, "satisfaction": 4.5 },
-                { "company": "Capital One", "url": "https://www.capitalonecareers.com/", "title": "Senior Manager, Software Engineering", "pay": "$160k - $230k", "security": 4.3, "growth": 4.2, "satisfaction": 4.1 },
-                { "company": "Paycom", "url": "https://www.paycom.com/careers/", "title": "Development Manager (Remote)", "pay": "$130k - $180k", "security": 4.0, "growth": 4.3, "satisfaction": 3.9 },
-                { "company": "Twilio", "url": "https://www.twilio.com/company/jobs", "title": "Engineering Manager, API (Remote, TX)", "pay": "$165k - $225k", "security": 4.2, "growth": 4.3, "satisfaction": 4.2 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `Texas Remote-First ${i+1}`, "url": "#", "title": "Remote Engineering Manager", "pay": "$150k - $210k", "security": 4.2, "growth": 4.3, "satisfaction": 4.4 }))
-            ],
-            "remote": [
-                { "company": "The Browser Company", "url": "https://www.thebrowser.company/careers", "title": "Engineering Tech Lead, AI", "pay": "$180k - $250k", "security": 4.1, "growth": 4.8, "satisfaction": 4.7 },
-                { "company": "GitLab", "url": "https://about.gitlab.com/jobs/", "title": "Engineering Manager", "pay": "$150k - $210k", "security": 4.5, "growth": 4.6, "satisfaction": 4.5 },
-                { "company": "Automattic", "url": "https://automattic.com/work-with-us/", "title": "Engineering Manager", "pay": "$140k - $190k", "security": 4.6, "growth": 4.4, "satisfaction": 4.6 },
-                { "company": "Atlassian", "url": "https://www.atlassian.com/company/careers", "title": "Senior Engineering Manager", "pay": "$170k - $240k", "security": 4.7, "growth": 4.5, "satisfaction": 4.5 },
-                { "company": "Shopify", "url": "https://www.shopify.com/careers", "title": "Senior Development Manager", "pay": "$160k - $230k", "security": 4.4, "growth": 4.5, "satisfaction": 4.4 },
-                { "company": "Stripe", "url": "https://stripe.com/jobs", "title": "Engineering Manager, Core Platform", "pay": "$190k - $280k", "security": 4.3, "growth": 4.6, "satisfaction": 4.3 },
-                { "company": "Figma", "url": "https://www.figma.com/careers/", "title": "Manager, Software Engineering", "pay": "$180k - $260k", "security": 4.5, "growth": 4.9, "satisfaction": 4.7 },
-                { "company": "Zapier", "url": "https://zapier.com/jobs", "title": "Engineering Manager", "pay": "$145k - $200k", "security": 4.8, "growth": 4.7, "satisfaction": 4.8 },
-                { "company": "Twilio", "url": "https://www.twilio.com/company/jobs", "title": "Engineering Manager, API", "pay": "$165k - $225k", "security": 4.2, "growth": 4.3, "satisfaction": 4.2 },
-                { "company": "Coinbase", "url": "https://www.coinbase.com/careers", "title": "Senior Manager, Software Engineering", "pay": "$200k - $300k", "security": 4.0, "growth": 4.5, "satisfaction": 4.1 },
-                ...Array.from({length: 90}, (_, i) => ({ "company": `Global Remote Innovators ${i+1}`, "url": "#", "title": "Lead Software Engineer", "pay": "$150k - $210k", "security": 4.2, "growth": 4.5, "satisfaction": 4.3 }))
-            ],
-             "california": [
-                { "company": "Qualcomm", "url": "https://www.qualcomm.com/company/careers", "title": "Sr. Manager, Engineering", "pay": "$180k - $260k", "security": 4.3, "growth": 4.2, "satisfaction": 4.1 },
-                { "company": "ServiceNow", "url": "https://www.servicenow.com/careers.html", "title": "Manager, Software Engineering", "pay": "$170k - $250k", "security": 4.6, "growth": 4.7, "satisfaction": 4.5 },
-                { "company": "Intuit", "url": "https://www.intuit.com/careers/", "title": "Software Development Manager", "pay": "$175k - $255k", "security": 4.5, "growth": 4.3, "satisfaction": 4.4 },
-                { "company": "Illumina", "url": "https://www.illumina.com/company/careers.html", "title": "Manager, Software Development", "pay": "$160k - $230k", "security": 4.1, "growth": 4.0, "satisfaction": 4.0 },
-                { "company": "General Atomics", "url": "https://www.ga-careers.com/", "title": "Manager, Software Engineering", "pay": "$150k - $210k", "security": 4.4, "growth": 4.1, "satisfaction": 4.2 },
-                { "company": "Viasat", "url": "https://careers.viasat.com/", "title": "Software Engineering Manager", "pay": "$155k - $220k", "security": 3.9, "growth": 3.8, "satisfaction": 3.9 },
-                { "company": "Sony Electronics", "url": "https://www.sonyjobs.com/", "title": "Engineering Manager, Platform", "pay": "$165k - $240k", "security": 4.2, "growth": 3.9, "satisfaction": 4.0 },
-                { "company": "ResMed", "url": "https://careers.resmed.com/", "title": "Manager, Digital Health Technology", "pay": "$160k - $225k", "security": 4.3, "growth": 4.4, "satisfaction": 4.2 },
-                { "company": "Jack in the Box", "url": "https://careers.jackinthebox.com/", "title": "IT Manager, Restaurant Systems", "pay": "$130k - $180k", "security": 3.8, "growth": 3.6, "satisfaction": 3.7 },
-                { "company": "Thermo Fisher Scientific", "url": "https://jobs.thermofisher.com/", "title": "Manager, Software Engineering", "pay": "$150k - $215k", "security": 4.2, "growth": 4.1, "satisfaction": 4.0 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `SoCal Tech Solutions ${i+1}`, "url": "#", "title": "Development Team Lead", "pay": "$160k - $220k", "security": 4.1, "growth": 4.2, "satisfaction": 4.1 }))
+            "california": [
+                { "company": "Qualcomm", "url": "https://www.qualcomm.com/company/careers", "title": "Senior Staff Engineer, Software", "pay": "$180,000 - $270,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Intuit", "url": "https://www.intuit.com/careers/", "title": "Staff Software Engineer", "pay": "$170,000 - $250,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "ServiceNow", "url": "https://www.servicenow.com/careers.html", "title": "Principal Software Engineer", "pay": "$190,000 - $280,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Illumina", "url": "https://www.illumina.com/company/careers.html", "title": "Staff Software Engineer", "pay": "$150,000 - $220,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Viasat", "url": "https://careers.viasat.com/", "title": "Senior Software Engineer", "pay": "$140,000 - $200,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Teradata", "url": "https://www.teradata.com/Careers", "title": "Lead Software Engineer", "pay": "$145,000 - $210,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Brain Corp", "url": "https://www.braincorp.com/careers/", "title": "Senior Robotics Software Engineer", "pay": "$150,000 - $215,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Cubic Corporation", "url": "https://www.cubic.com/careers", "title": "Principal Software Engineer", "pay": "$135,000 - $190,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Cloudbeds", "url": "https://www.cloudbeds.com/careers/", "title": "Software Engineering Manager", "pay": "$180,000 - $241,200", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "Lytx", "url": "https://www.lytx.com/en-us/about-us/careers", "title": "Software Engineering Manager", "pay": "$234,000 - $327,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "General Atomics", "url": "https://www.ga.com/careers", "title": "Engineering Manager", "pay": "$140,000 - $180,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Apple", "url": "https://www.apple.com/careers/", "title": "Engineering Project Manager", "pay": "$160,000 - $250,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "Sony Electronics", "url": "https://www.sonyjobs.com/", "title": "Staff Software Engineer", "pay": "$140,000 - $200,000", "security": 5, "growth": 2, "satisfaction": 4 },
+                { "company": "Shield AI", "url": "https://www.shield.ai/careers/", "title": "Software Engineering Manager", "pay": "$220,000 - $265,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "ClickUp", "url": "https://clickup.com/careers", "title": "Senior Backend Engineer", "pay": "$140,000 - $190,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Petco", "url": "https://careers.petco.com/", "title": "Software Engineering Manager", "pay": "$180,000 - $348,000", "security": 4, "growth": 2, "satisfaction": 2 },
+                { "company": "Trust & Will", "url": "https://trustandwill.com/careers", "title": "Senior Software Engineer", "pay": "$140,000 - $190,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "ASML", "url": "https://www.asml.com/en/careers", "title": "Software Design Engineer", "pay": "$130,000 - $185,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Cox Communications", "url": "https://jobs.cox.com/", "title": "Lead Software Engineer", "pay": "$120,000 - $170,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "pSemi", "url": "https://www.psemi.com/careers", "title": "Senior Staff Design Engineer", "pay": "$160,000 - $230,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Samsung Semiconductor", "url": "https://www.samsung.com/us/sas/careers/", "title": "Staff Engineer", "pay": "$150,000 - $220,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "AbacusNext", "url": "https://www.abacusnext.com/careers/", "title": "Senior DevOps Engineer", "pay": "$120,000 - $165,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Biosero", "url": "https://biosero.com/company/careers/", "title": "Senior Software Engineer", "pay": "$125,000 - $170,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Chatmeter", "url": "https://www.chatmeter.com/careers/", "title": "Lead Software Engineer", "pay": "$140,000 - $190,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Housecall Pro", "url": "https://www.housecallpro.com/careers/", "title": "Engineering Manager", "pay": "$160,000 - $230,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Mapp Digital", "url": "https://mapp.com/careers/", "title": "Senior Solutions Engineer", "pay": "$130,000 - $180,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "NetraDyne", "url": "https://www.netradyne.com/careers/", "title": "Senior Embedded Systems Engineer", "pay": "$140,000 - $195,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Epsilon Systems", "url": "https://www.epsilonsystems.com/careers/", "title": "Senior Software Developer", "pay": "$110,000 - $160,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "CCS Global Tech", "url": "https://ccsglobaltech.com/careers/", "title": "Senior Data Engineer", "pay": "$120,000 - $170,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "SDTEK", "url": "https://www.sdtek.net/about-us/careers/", "title": "Senior IT Consultant", "pay": "$90,000 - $130,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Excedeo", "url": "https://excedeo.com/about-us/careers/", "title": "Senior Systems Administrator", "pay": "$85,000 - $120,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Novus Technology", "url": "https://www.novustek.net/about-us/careers/", "title": "IT Project Manager", "pay": "$95,000 - $135,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Fusion Factor", "url": "https://www.fusionfactor.com/about-us/careers/", "title": "Senior Network Engineer", "pay": "$100,000 - $140,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Race Computer Services", "url": "https://www.racecs.com/about-us/careers/", "title": "Senior IT Support Specialist", "pay": "$80,000 - $110,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "Techs in a Sec", "url": "https://www.techsinasec.com/about-us/careers/", "title": "IT Project Coordinator", "pay": "$70,000 - $100,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "Lakeside Software", "url": "https://www.lakesidesoftware.com/about/careers", "title": "Senior Software Engineer", "pay": "$130,000 - $180,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "KR Wolfe Inc.", "url": "https://www.krwolfe.com/careers/", "title": "Systems Integration Engineer", "pay": "$90,000 - $130,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Turning Point", "url": "https://www.davidjeremiah.org/about/employment", "title": "Editorial Assistant", "pay": "$26 - $27.50/hr", "security": 4, "growth": 2, "satisfaction": 4 },
+                { "company": "Athletic Brewing Co.", "url": "https://athleticbrewing.com/pages/careers", "title": "Copywriter", "pay": "$80,000 - $100,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Raindrop", "url": "https://raindrop.agency/careers", "title": "Account Manager", "pay": "$60,000 - $63,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Ascent Funding", "url": "https://www.ascentfunding.com/careers/", "title": "Lending Product Operations Associate", "pay": "$70,000 - $95,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Scientific Research Corp (SRC)", "url": "https://www.scires.com/careers", "title": "Senior Software Engineer", "pay": "$120,000 - $170,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Citadel Defense", "url": "https://www.dronecitadel.com/careers", "title": "Senior Embedded Engineer", "pay": "$130,000 - $185,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Jabil", "url": "https://www.jabil.com/careers.html", "title": "IT Manager", "pay": "$100,000 - $150,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Inertia", "url": "https://www.inertia.com/", "title": "Senior Software Developer", "pay": "$115,000 - $160,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Design Everest", "url": "https://www.designeverest.com/careers", "title": "Project Manager, Engineering", "pay": "$90,000 - $130,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Jubel", "url": "https://www.jubel.co/careers", "title": "Senior Full Stack Engineer", "pay": "$120,000 - $170,000", "security": 2, "growth": 4, "satisfaction": 4 },
+                { "company": "Bitcot", "url": "https://www.bitcot.com/careers/", "title": "Senior Project Manager", "pay": "$110,000 - $150,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "HelloTech", "url": "https://www.hellotech.com/careers", "title": "Field Technician Manager", "pay": "$75,000 - $105,000", "security": 3, "growth": 2, "satisfaction": 3 }
             ],
             "utah": [
-                { "company": "Adobe", "url": "https://careers.adobe.com/", "title": "Software Development Manager", "pay": "$160k - $230k", "security": 4.7, "growth": 4.4, "satisfaction": 4.6 },
-                { "company": "Qualtrics", "url": "https://www.qualtrics.com/careers/", "title": "Engineering Manager", "pay": "$150k - $220k", "security": 4.4, "growth": 4.8, "satisfaction": 4.5 },
-                { "company": "Pluralsight", "url": "https://www.pluralsight.com/careers", "title": "Manager, Software Engineering", "pay": "$140k - $200k", "security": 4.0, "growth": 4.2, "satisfaction": 4.3 },
-                { "company": "Domo", "url": "https://www.domo.com/company/careers", "title": "Software Engineering Manager", "pay": "$145k - $210k", "security": 3.8, "growth": 4.1, "satisfaction": 3.9 },
-                { "company": "Lucid", "url": "https://lucid.co/careers", "title": "Engineering Manager", "pay": "$150k - $215k", "security": 4.5, "growth": 4.7, "satisfaction": 4.6 },
-                { "company": "Instructure", "url": "https://www.instructure.com/careers", "title": "Manager, Software Engineering", "pay": "$135k - $190k", "security": 4.1, "growth": 4.0, "satisfaction": 4.2 },
-                { "company": "Ancestry", "url": "https://www.ancestry.com/corporate/careers", "title": "Software Development Manager", "pay": "$140k - $205k", "security": 4.2, "growth": 4.1, "satisfaction": 4.2 },
-                { "company": "Health Catalyst", "url": "https://www.healthcatalyst.com/careers/", "title": "Engineering Manager", "pay": "$130k - $185k", "security": 4.3, "growth": 4.5, "satisfaction": 4.4 },
-                { "company": "MX", "url": "https://www.mx.com/careers/", "title": "Engineering Manager, Platform", "pay": "$150k - $220k", "security": 4.2, "growth": 4.6, "satisfaction": 4.3 },
-                { "company": "Podium", "url": "https://www.podium.com/careers", "title": "Sr. Engineering Manager", "pay": "$160k - $230k", "security": 4.0, "growth": 4.5, "satisfaction": 4.1 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `Silicon Slopes Co ${i+1}`, "url": "#", "title": "Manager, Engineering", "pay": "$145k - $200k", "security": 4.2, "growth": 4.4, "satisfaction": 4.3 }))
+                { "company": "Adobe", "url": "https://www.adobe.com/careers.html", "title": "Senior Computer Scientist", "pay": "$155,000 - $225,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "Qualtrics", "url": "https://www.qualtrics.com/careers/", "title": "Senior Manager, FinTech Systems", "pay": "$150,000 - $220,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Domo", "url": "https://www.domo.com/company/careers", "title": "Software Engineering Manager", "pay": "$133,000 - $186,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "Pluralsight", "url": "https://www.pluralsight.com/careers", "title": "Director of AI/ML Engineering", "pay": "$180,000 - $250,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Podium", "url": "https://www.podium.com/careers/", "title": "Software Engineering Manager", "pay": "$202,000 - $281,000", "security": 3, "growth": 5, "satisfaction": 3 },
+                { "company": "Ancestry", "url": "https://careers.ancestry.com/", "title": "Software Engineering Manager", "pay": "$151,000 - $215,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Instructure", "url": "https://www.instructure.com/careers", "title": "Senior Software Engineer", "pay": "$130,000 - $185,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Overstock.com", "url": "https://www.overstock.com/careers", "title": "Engineering Manager", "pay": "$140,000 - $200,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "eBay", "url": "https://careers.ebayinc.com/", "title": "Senior Manager, Software Engineering", "pay": "$190,000 - $280,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Microsoft", "url": "https://careers.microsoft.com/", "title": "Principal Software Engineering Manager", "pay": "$210,000 - $300,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Divvy (by BILL)", "url": "https://apply.workable.com/divvy/", "title": "Senior Product Manager, Card Product", "pay": "$142,000 - $170,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Lendio", "url": "https://www.lendio.com/careers/", "title": "Director of Engineering", "pay": "$160,000 - $220,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Canopy", "url": "https://www.getcanopy.com/careers", "title": "Senior Software Engineer", "pay": "$135,000 - $180,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "ObservePoint", "url": "https://www.observepoint.com/about/careers/", "title": "Engineering Manager", "pay": "$130,000 - $175,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Filevine", "url": "https://www.filevine.com/careers/", "title": "Lead Software Engineer", "pay": "$140,000 - $190,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Vivint Smart Home", "url": "https://www.vivint.com/company/careers", "title": "Senior Manager, Software Engineering", "pay": "$160,000 - $230,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Entrata", "url": "https://www.entrata.com/careers", "title": "Software Engineering Manager", "pay": "$150,000 - $210,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "MX Technologies", "url": "https://www.mx.com/careers/", "title": "Senior Engineering Manager", "pay": "$170,000 - $240,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Weave", "url": "https://www.getweave.com/careers/", "title": "Staff Software Engineer", "pay": "$160,000 - $220,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "BambooHR", "url": "https://www.bamboohr.com/careers/", "title": "Software Engineering Manager", "pay": "$155,000 - $215,000", "security": 5, "growth": 4, "satisfaction": 5 },
+                { "company": "Lucid", "url": "https://lucid.co/careers", "title": "Engineering Manager", "pay": "$160,000 - $230,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "HealthEquity", "url": "https://healthequity.com/careers", "title": "IT Engineering Manager", "pay": "$130,000 - $180,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Clearlink", "url": "https://www.clearlink.com/careers/", "title": "Director of Engineering", "pay": "$150,000 - $200,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "Degreed", "url": "https://degreed.com/careers", "title": "Senior Engineering Manager", "pay": "$170,000 - $235,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "CoDev", "url": "https://codev.com/careers/", "title": "Senior Software Developer", "pay": "$100,000 - $140,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Algoscale", "url": "https://www.algoscale.com/careers/", "title": "Senior Data Engineer", "pay": "$120,000 - $170,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Kahoa", "url": "https://kahoa.com/careers/", "title": "Principal Software Engineer", "pay": "$150,000 - $210,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Jellyfish Technologies", "url": "https://www.jellyfishtechnologies.com/careers.html", "title": "Tech Lead", "pay": "$110,000 - $150,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Discover", "url": "https://jobs.discover.com/", "title": "Principal Engineer", "pay": "$140,000 - $200,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Block (Square)", "url": "https://block.xyz/careers", "title": "Software Engineering Manager", "pay": "$180,000 - $270,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Navan", "url": "https://navan.com/careers", "title": "Senior Software Engineer", "pay": "$150,000 - $220,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Motorola Solutions", "url": "https://www.motorolasolutions.com/en_us/about/careers.html", "title": "Senior Staff Software Engineer", "pay": "$140,000 - $190,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Strider", "url": "https://www.strider.tech/careers", "title": "Lead Software Engineer", "pay": "$135,000 - $185,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Snap Finance", "url": "https://snapfinance.com/careers", "title": "Director of Software Engineering", "pay": "$170,000 - $240,000", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "BlueVine", "url": "https://www.bluevine.com/careers/", "title": "Senior Engineering Manager", "pay": "$165,000 - $230,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Neighbor", "url": "https://www.neighbor.com/careers", "title": "Senior Software Engineer", "pay": "$140,000 - $190,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Alianza", "url": "https://www.alianza.com/careers/", "title": "Senior Cloud Engineer", "pay": "$125,000 - $170,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "BrainStorm", "url": "https://www.brainstorminc.com/careers", "title": "Software Development Manager", "pay": "$130,000 - $180,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "InsideSales (XANT)", "url": "https://www.xant.ai/company/careers/", "title": "Senior Software Engineer", "pay": "$130,000 - $175,000", "security": 2, "growth": 2, "satisfaction": 3 },
+                { "company": "Lingotek", "url": "https://www.lingotek.com/careers", "title": "Senior Full Stack Developer", "pay": "$120,000 - $160,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "MasterControl", "url": "https://www.mastercontrol.com/careers/", "title": "Software Engineering Manager", "pay": "$140,000 - $195,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "HireVue", "url": "https://www.hirevue.com/careers", "title": "Lead Software Engineer", "pay": "$145,000 - $200,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Ivanti", "url": "https://www.ivanti.com/company/careers", "title": "Principal Software Engineer", "pay": "$150,000 - $210,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Sorenson Capital", "url": "https://sorensoncapital.com/", "title": "(Varies by portfolio company)", "pay": "(Varies)", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "VLCM", "url": "https://www.vlcm.com/company/careers/", "title": "Senior Network Engineer", "pay": "$100,000 - $140,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "DHI Computing Service", "url": "https://www.dhicorp.org/", "title": "Senior Software Developer", "pay": "$100,000 - $145,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Awardco", "url": "https://www.award.co/careers", "title": "Senior Software Engineer", "pay": "$130,000 - $180,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Claravine", "url": "https://www.claravine.com/company/careers/", "title": "Backend Engineer", "pay": "$110,000 - $150,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Simplifile", "url": "https://simplifile.com/careers/", "title": "Software Engineer III", "pay": "$115,000 - $160,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Smarty", "url": "https://www.smarty.com/careers", "title": "Senior Software Engineer", "pay": "$140,000 - $190,000", "security": 4, "growth": 4, "satisfaction": 5 }
             ],
             "fintech-remote": [
-                { "company": "Stripe", "url": "https://stripe.com/jobs", "title": "Engineering Manager, Payments", "pay": "$190k - $280k", "security": 4.3, "growth": 4.6, "satisfaction": 4.3 },
-                { "company": "Brex", "url": "https://www.brex.com/careers", "title": "Engineering Manager", "pay": "$180k - $260k", "security": 4.1, "growth": 4.8, "satisfaction": 4.2 },
-                { "company": "Chime", "url": "https://www.chime.com/careers/", "title": "Sr. Engineering Manager", "pay": "$200k - $290k", "security": 4.2, "growth": 4.7, "satisfaction": 4.4 },
-                { "company": "Plaid", "url": "https://plaid.com/careers/", "title": "Engineering Manager, Core Services", "pay": "$185k - $270k", "security": 4.4, "growth": 4.6, "satisfaction": 4.4 },
-                { "company": "Block (Square)", "url": "https://block.xyz/careers", "title": "Software Development Manager", "pay": "$170k - $250k", "security": 4.3, "growth": 4.4, "satisfaction": 4.2 },
-                { "company": "Circle", "url": "https://www.circle.com/en/careers", "title": "Data Engineering Manager", "pay": "$180k - $240k", "security": 4.5, "growth": 4.9, "satisfaction": 4.6 },
-                { "company": "Affirm", "url": "https://www.affirm.com/careers", "title": "Engineering Manager", "pay": "$175k - $245k", "security": 4.0, "growth": 4.3, "satisfaction": 4.0 },
-                { "company": "Dave", "url": "https://dave.com/careers", "title": "Sr. Manager, Software Engineering", "pay": "$190k - $260k", "security": 4.1, "growth": 4.5, "satisfaction": 4.2 },
-                { "company": "Marqeta", "url": "https://www.marqeta.com/company/careers", "title": "Engineering Manager, Platform", "pay": "$160k - $230k", "security": 4.2, "growth": 4.4, "satisfaction": 4.1 },
-                { "company": "Toast", "url": "https://careers.toasttab.com/", "title": "Software Development Manager", "pay": "$150k - $210k", "security": 4.3, "growth": 4.6, "satisfaction": 4.2 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `Global FinTech ${i+1}`, "url": "#", "title": "FinTech Dev Manager", "pay": "$170k - $240k", "security": 4.2, "growth": 4.5, "satisfaction": 4.3 }))
+                { "company": "Stripe", "url": "https://stripe.com/jobs", "title": "Engineering Manager, Product", "pay": "$214,500 - $321,800", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Plaid", "url": "https://plaid.com/careers/", "title": "Engineering Manager, Product Foundations", "pay": "$214,800 - $366,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Chime", "url": "https://www.chime.com/careers/", "title": "Engineering Manager, Lending", "pay": "$176,490 - $245,100", "security": 4, "growth": 4, "satisfaction": 3 },
+                { "company": "Brex", "url": "https://www.brex.com/careers", "title": "Engineering Manager, Frontend Platform", "pay": "$240,000 - $375,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Ramp", "url": "https://ramp.com/careers", "title": "Software Engineering Manager", "pay": "$227,000 - $311,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Circle", "url": "https://www.circle.com/en/careers", "title": "Data Engineering Manager", "pay": "$182,500 - $240,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Block (Square)", "url": "https://block.xyz/careers", "title": "Engineering Manager", "pay": "$180,000 - $270,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Coinbase", "url": "https://www.coinbase.com/careers", "title": "Senior Engineering Manager", "pay": "$220,000 - $310,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Upstart", "url": "https://www.upstart.com/careers", "title": "Engineering Manager", "pay": "$190,000 - $260,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "SoFi", "url": "https://www.sofi.com/careers/", "title": "Manager, Software Engineering", "pay": "$170,000 - $250,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Gusto", "url": "https://gusto.com/careers", "title": "Engineering Manager", "pay": "$185,000 - $255,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Human Interest", "url": "https://humaninterest.com/careers", "title": "Senior Engineering Manager", "pay": "$190,000 - $265,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Guideline", "url": "https://www.guideline.com/careers", "title": "Engineering Manager", "pay": "$180,000 - $245,000", "security": 4, "growth": 4, "satisfaction": 5 },
+                { "company": "Nova Credit", "url": "https://www.novacredit.com/careers", "title": "Engineering Manager", "pay": "$175,000 - $240,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "BlueVine", "url": "https://www.bluevine.com/careers/", "title": "Director of Engineering", "pay": "$200,000 - $280,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "OppFi", "url": "https://www.oppfi.com/careers/", "title": "Director, Software Engineering", "pay": "$160,000 - $220,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Toast", "url": "https://careers.toasttab.com/", "title": "Software Engineering Manager", "pay": "$170,000 - $240,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Navan", "url": "https://navan.com/careers", "title": "Engineering Manager", "pay": "$180,000 - $250,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Fireblocks", "url": "https://www.fireblocks.com/careers/", "title": "Senior Engineering Manager", "pay": "$210,000 - $290,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Bilt Rewards", "url": "https://www.biltrewards.com/careers", "title": "Director of Engineering", "pay": "$200,000 - $280,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Trumid", "url": "https://www.trumid.com/careers/", "title": "Head of Platform Engineering", "pay": "$220,000 - $310,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "DailyPay", "url": "https://www.dailypay.com/careers/", "title": "Engineering Manager", "pay": "$165,000 - $230,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Alloy", "url": "https://www.alloy.com/careers", "title": "Engineering Manager, Platform", "pay": "$180,000 - $250,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Workiva", "url": "https://www.workiva.com/careers", "title": "Software Engineering Manager", "pay": "$160,000 - $220,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "Enfusion", "url": "https://www.enfusionsystems.com/careers/", "title": "Manager, Software Engineering", "pay": "$150,000 - $210,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Unanet", "url": "https://unanet.com/careers/", "title": "Director of Software Development", "pay": "$155,000 - $215,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "FloQast", "url": "https://floqast.com/careers/", "title": "Engineering Manager", "pay": "$170,000 - $235,000", "security": 4, "growth": 4, "satisfaction": 5 },
+                { "company": "Moov Financial", "url": "https://moov.io/careers/", "title": "Engineering Manager", "pay": "$160,000 - $220,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "ActBlue", "url": "https://www.actblue.com/about/jobs", "title": "Engineering Manager", "pay": "$175,000 - $230,000", "security": 5, "growth": 3, "satisfaction": 5 },
+                { "company": "Inspira Financial", "url": "https://www.inspirafinancial.com/careers", "title": "Manager, IT Development", "pay": "$140,000 - $190,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Pie Insurance", "url": "https://pieinsurance.com/careers/", "title": "Software Engineering Manager", "pay": "$160,000 - $225,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Hiro Systems", "url": "https://www.hiro.so/careers", "title": "Engineering Lead", "pay": "$150,000 - $210,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Figment", "url": "https://www.figment.io/careers/", "title": "Engineering Manager, Protocol Indexing", "pay": "$165,000 - $190,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Pinwheel", "url": "https://www.pinwheelapi.com/careers", "title": "Engineering Manager", "pay": "$170,000 - $230,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Forward Financing", "url": "https://www.forwardfinancing.com/careers/", "title": "Director of Engineering", "pay": "$180,000 - $250,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "TrueML", "url": "https://www.trueml.com/careers/", "title": "Software Development Manager", "pay": "$150,000 - $205,000", "security": 3, "growth": 3, "satisfaction": 4 },
+                { "company": "Airwallex", "url": "https://www.airwallex.com/careers", "title": "Engineering Manager", "pay": "$190,000 - $270,000", "security": 4, "growth": 5, "satisfaction": 4 },
+                { "company": "Reorg", "url": "https://reorg.com/careers/", "title": "Engineering Manager", "pay": "$180,000 - $240,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "ePayPolicy", "url": "https://epaypolicy.com/careers/", "title": "Development Manager", "pay": "$140,000 - $190,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Capco", "url": "https://www.capco.com/Careers", "title": "Managing Principal, Technology", "pay": "$170,000 - $250,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Wipfli", "url": "https://www.wipfli.com/careers", "title": "Manager, Technology Consulting", "pay": "$130,000 - $180,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "TransUnion", "url": "https://www.transunion.com/careers", "title": "Manager, Software Engineering", "pay": "$140,000 - $195,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Riskified", "url": "https://www.riskified.com/careers/", "title": "Engineering Team Lead", "pay": "$160,000 - $220,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Canoe", "url": "https://canoeintelligence.com/careers", "title": "Director of Engineering", "pay": "$190,000 - $260,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Capital One", "url": "https://www.capitalonecareers.com/", "title": "Senior Manager, Software Engineering", "pay": "$180,000 - $260,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "MetLife", "url": "https://www.metlife.com/careers/", "title": "Director, Digital Engineering", "pay": "$160,000 - $230,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Liberty Mutual", "url": "https://jobs.libertymutualgroup.com/", "title": "Director, Software Engineering", "pay": "$170,000 - $240,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Self Financial", "url": "https://www.self.inc/careers", "title": "Engineering Manager", "pay": "$165,000 - $225,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Upgrade", "url": "https://www.upgrade.com/careers/", "title": "Senior Engineering Manager", "pay": "$190,000 - $270,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Ascent", "url": "https://www.ascentregtech.com/careers", "title": "Head of Engineering", "pay": "$180,000 - $250,000", "security": 3, "growth": 4, "satisfaction": 4 }
             ],
             "fintech-ca": [
-                { "company": "Intuit", "url": "https://www.intuit.com/careers/", "title": "Group Development Manager, FinTech", "pay": "$190k - $280k", "security": 4.5, "growth": 4.3, "satisfaction": 4.4 },
-                { "company": "PayPal", "url": "https://careers.pypl.com/", "title": "Manager 2, Software Engineering", "pay": "$160k - $240k", "security": 4.2, "growth": 4.1, "satisfaction": 4.1 },
-                { "company": "SoFi", "url": "https://www.sofi.com/careers/", "title": "Engineering Manager, Banking", "pay": "$170k - $250k", "security": 4.0, "growth": 4.5, "satisfaction": 4.0 },
-                { "company": "Credit Karma", "url": "https://www.creditkarma.com/careers", "title": "Senior Manager, Engineering", "pay": "$195k - $290k", "security": 4.3, "growth": 4.2, "satisfaction": 4.3 },
-                { "company": "Robinhood", "url": "https://careers.robinhood.com/", "title": "Engineering Manager", "pay": "$180k - $270k", "security": 3.9, "growth": 4.3, "satisfaction": 3.8 },
-                { "company": "Upgrade", "url": "https://www.upgrade.com/careers/", "title": "Director of Engineering", "pay": "$200k - $300k", "security": 4.1, "growth": 4.6, "satisfaction": 4.2 },
-                { "company": "LendingClub", "url": "https://www.lendingclub.com/company/careers", "title": "Software Engineering Manager", "pay": "$165k - $235k", "security": 3.8, "growth": 3.7, "satisfaction": 3.7 },
-                { "company": "Green Dot", "url": "https://www.greendot.com/careers", "title": "Manager, Software Development", "pay": "$150k - $210k", "security": 3.7, "growth": 3.5, "satisfaction": 3.6 },
-                { "company": "Acorns", "url": "https://www.acorns.com/careers/", "title": "Engineering Manager, Core Platform", "pay": "$175k - $245k", "security": 4.2, "growth": 4.5, "satisfaction": 4.3 },
-                { "company": "Bill.com", "url": "https://www.bill.com/careers", "title": "Sr. Engineering Manager", "pay": "$180k - $260k", "security": 4.4, "growth": 4.7, "satisfaction": 4.5 },
-                ...Array.from({length: 40}, (_, i) => ({ "company": `California FinTech Co ${i+1}`, "url": "#", "title": "Lead Platform Engineer", "pay": "$175k - $250k", "security": 4.1, "growth": 4.3, "satisfaction": 4.2 }))
+                { "company": "Axos Bank", "url": "https://www.axosbank.com/careers", "title": "Software Engineering Manager", "pay": "$116,200 - $162,400", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "National Funding", "url": "https://www.nationalfunding.com/careers/", "title": "Software Engineering Manager", "pay": "$180,000 - $221,100", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Trust & Will", "url": "https://trustandwill.com/careers", "title": "Engineering Manager", "pay": "$125,000 - $193,500", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Cloudbeds", "url": "https://www.cloudbeds.com/careers/", "title": "Software Engineering Manager", "pay": "$180,000 - $241,200", "security": 3, "growth": 4, "satisfaction": 3 },
+                { "company": "MK Decision", "url": "https://mkdecision.com/careers", "title": "Software Engineer (Lead potential)", "pay": "$130,000 - $190,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "Clear Street", "url": "https://clearstreet.io/careers", "title": "Engineering Manager", "pay": "$190,000 - $270,000", "security": 3, "growth": 5, "satisfaction": 4 },
+                { "company": "Ensight", "url": "https://www.ensight.com/careers", "title": "Head of Engineering", "pay": "$160,000 - $230,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Reliant Funding", "url": "https://www.reliantfunding.com/careers/", "title": "IT Manager", "pay": "$110,000 - $150,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "FLORES", "url": "https://flores-financial.com/careers/", "title": "IT Director", "pay": "$120,000 - $165,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Acrisure Innovation", "url": "https://www.acrisure.com/innovation-careers", "title": "Technology Lead", "pay": "$150,000 - $210,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "Semantic AI", "url": "https://www.semantic-ai.com/careers", "title": "Lead Software Engineer", "pay": "$140,000 - $195,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Luminia", "url": "https://www.luminiacapital.com/careers", "title": "Head of Platform Technology", "pay": "$170,000 - $240,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "eMoney Advisor", "url": "https://emoneyadvisor.com/careers/", "title": "Manager, Software Engineering", "pay": "$150,000 - $215,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Trulioo", "url": "https://www.trulioo.com/company/careers", "title": "Engineering Manager", "pay": "$160,000 - $225,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "CSC", "url": "https://www.cscglobal.com/careers/", "title": "Lead Application Developer", "pay": "$130,000 - $180,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "FIS", "url": "https://www.fisglobal.com/en/careers", "title": "Director, Software Development", "pay": "$160,000 - $230,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "GoFundMe", "url": "https://www.gofundme.com/c/careers", "title": "Engineering Manager", "pay": "$180,000 - $250,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "Lendbuzz", "url": "https://lendbuzz.com/careers", "title": "Head of Engineering", "pay": "$190,000 - $270,000", "security": 3, "growth": 5, "satisfaction": 5 },
+                { "company": "AppZen", "url": "https://www.appzen.com/company/careers/", "title": "Senior Engineering Manager", "pay": "$185,000 - $260,000", "security": 3, "growth": 4, "satisfaction": 4 },
+                { "company": "GuidedChoice", "url": "https://www.guidedchoice.com/", "title": "Lead Software Architect", "pay": "$150,000 - $210,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "OPY USA", "url": "https://www.opy.com/us/careers/", "title": "Technology Manager", "pay": "$130,000 - $180,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "One World Ventures", "url": "https://oneworldventuresinc.com/", "title": "IT Director", "pay": "$120,000 - $170,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "Encore Capital Group", "url": "https://www.encorecapital.com/careers/", "title": "Manager, Application Development", "pay": "$140,000 - $190,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "LSSI", "url": "https://www.lendersupport.com/", "title": "IT Manager", "pay": "$100,000 - $140,000", "security": 3, "growth": 2, "satisfaction": 3 },
+                { "company": "AffiniPay", "url": "https://affinipay.com/about/careers/", "title": "Software Development Manager", "pay": "$150,000 - $210,000", "security": 4, "growth": 4, "satisfaction": 4 },
+                { "company": "X-Technologies", "url": "https://www.x-technologies.com/careers", "title": "IT Program Manager", "pay": "$120,000 - $160,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "SWBC", "url": "https://careers.swbc.com/", "title": "Manager, Application Development", "pay": "$125,000 - $175,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "JPMorgan Chase & Co.", "url": "https://careers.jpmorgan.com/", "title": "Vice President, Software Engineering", "pay": "$160,000 - $240,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Mission Fed Credit Union", "url": "https://www.missionfed.com/careers", "title": "Manager, Application Development", "pay": "$120,000 - $160,000", "security": 5, "growth": 2, "satisfaction": 4 },
+                { "company": "San Diego County Credit Union", "url": "https://www.sdccu.com/about/careers/", "title": "Director of IT", "pay": "$140,000 - $190,000", "security": 5, "growth": 2, "satisfaction": 4 },
+                { "company": "California Coast Credit Union", "url": "https://www.calcoastcu.org/about-us/careers.htm", "title": "IT Development Manager", "pay": "$130,000 - $175,000", "security": 5, "growth": 2, "satisfaction": 4 },
+                { "company": "Navy Federal Credit Union", "url": "https://www.navyfederal.org/about/careers.html", "title": "Manager, ISD", "pay": "$140,000 - $200,000", "security": 5, "growth": 3, "satisfaction": 5 },
+                { "company": "Point Loma Credit Union", "url": "https://www.plcu.com/about-us/careers", "title": "IT Manager", "pay": "$110,000 - $150,000", "security": 4, "growth": 2, "satisfaction": 4 },
+                { "company": "North Island Credit Union", "url": "https://www.ccu.com/about/careers", "title": "AVP, Application Development", "pay": "$135,000 - $180,000", "security": 5, "growth": 2, "satisfaction": 4 },
+                { "company": "Bank of America", "url": "https://careers.bankofamerica.com/", "title": "Senior Technology Manager", "pay": "$150,000 - $220,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Wells Fargo", "url": "https://www.wellsfargo.com/about/careers/", "title": "Technology Manager", "pay": "$155,000 - $225,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "U.S. Bank", "url": "https://www.usbank.com/careers.html", "title": "Engineering Manager", "pay": "$145,000 - $210,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Citi", "url": "https://careers.citi.com/", "title": "Senior Vice President, Technology", "pay": "$180,000 - $260,000", "security": 5, "growth": 3, "satisfaction": 3 },
+                { "company": "Morgan Stanley", "url": "https://www.morganstanley.com/careers", "title": "Technology Division Manager", "pay": "$190,000 - $280,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Goldman Sachs", "url": "https://www.goldmansachs.com/careers/", "title": "Vice President, Engineering", "pay": "$200,000 - $300,000", "security": 5, "growth": 4, "satisfaction": 4 },
+                { "company": "American Express", "url": "https://www.americanexpress.com/en-us/careers/", "title": "Engineering Director", "pay": "$190,000 - $270,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "LoanDepot", "url": "https://www.loandepot.com/careers", "title": "Director of Software Engineering", "pay": "$170,000 - $240,000", "security": 3, "growth": 3, "satisfaction": 3 },
+                { "company": "Guild Mortgage", "url": "https://www.guildmortgage.com/careers/", "title": "IT Development Manager", "pay": "$140,000 - $190,000", "security": 4, "growth": 2, "satisfaction": 3 },
+                { "company": "Rocket Mortgage", "url": "https://www.rocketmortgage.com/careers", "title": "Engineering Team Leader", "pay": "$160,000 - $230,000", "security": 4, "growth": 3, "satisfaction": 4 },
+                { "company": "LPL Financial", "url": "https://www.lpl.com/careers.html", "title": "AVP, Technology", "pay": "$150,000 - $210,000", "security": 4, "growth": 3, "satisfaction": 3 },
+                { "company": "Charles Schwab", "url": "https://www.schwabjobs.com/", "title": "Senior Manager, Software Development", "pay": "$160,000 - $230,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Fidelity Investments", "url": "https://jobs.fidelity.com/", "title": "Director, Software Engineering", "pay": "$170,000 - $250,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "TIAA", "url": "https://www.tiaa.org/public/about-tiaa/careers", "title": "Senior IT Manager", "pay": "$150,000 - $220,000", "security": 5, "growth": 2, "satisfaction": 3 },
+                { "company": "Jack Henry & Associates", "url": "https://www.jackhenry.com/careers", "title": "Software Engineering Manager", "pay": "$140,000 - $190,000", "security": 5, "growth": 3, "satisfaction": 4 },
+                { "company": "Fiserv", "url": "https://www.fiserv.com/en/about-fiserv/careers.html", "title": "Manager, Tech Lead", "pay": "$145,000 - $205,000", "security": 5, "growth": 2, "satisfaction": 3 }
             ]
         };
 
         const jobBoard = document.getElementById('job-board');
         const navContainer = document.getElementById('nav-container');
-        let currentCategory = 'texas-general';
+        let currentCategory = 'remote';
 
         function createRatingBar(label, value) {
             const percentage = (value / 5) * 100;
-            let barColor = 'bg-green-500';
-            if (percentage < 80) barColor = 'bg-yellow-500';
-            if (percentage < 60) barColor = 'bg-red-500';
+            let barColor = 'bg-indigo-500'; // Default to Indigo for good ratings
+            if (value < 4.0) barColor = 'bg-yellow-500';
+            if (value < 3.0) barColor = 'bg-red-500';
 
             return `
                 <div class="w-full">
@@ -227,9 +451,9 @@
                         <p class="text-sm text-slate-500 mt-2 bg-slate-100 inline-block px-2 py-1 rounded">${data.pay}</p>
                     </div>
                     <div class="mt-4 space-y-3">
-                        ${createRatingBar('Employee Satisfaction', data.satisfaction)}
-                        ${createRatingBar('Job Security', data.security)}
-                        ${createRatingBar('Growth Potential', data.growth)}
+                        ${createRatingBar('Satisfaction', data.satisfaction)}
+                        ${createRatingBar('Security', data.security)}
+                        ${createRatingBar('Growth', data.growth)}
                     </div>
                     <a href="${data.url}" target="_blank" rel="noopener noreferrer" class="mt-5 block w-full bg-indigo-500 text-white text-center font-semibold py-2 rounded-md hover:bg-indigo-600 transition-colors">
                         View Openings
@@ -260,17 +484,12 @@
             }
         });
 
+        // Initial render
         window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
-            const initialButton = navContainer.querySelector(`[data-category="${currentCategory}"]`);
-            if(initialButton) {
-                initialButton.classList.add('active');
-            }
-            renderJobs(currentCategory);
+             renderJobs(currentCategory);
         });
 
     </script>
 
 </body>
 </html>
-
